@@ -15,22 +15,15 @@ df = pd.read_csv("spotify dataset.csv")
 print("Dataset Shape:", df.shape)
 print(df.head())
 
-# ============================================
-# 2. Data Cleaning
-# ============================================
 
 print("\nChecking Missing Values...\n")
 print(df.isnull().sum())
 
-# Drop missing values if any
 df = df.dropna()
 
 print("\nAfter Cleaning Shape:", df.shape)
 
-
-
 target_col = "playlist_genre"
-
 
 drop_cols = ["track_id", "artists", "album_name", "track_name"]
 
@@ -53,8 +46,6 @@ y_encoded = encoder.fit_transform(y)
 
 print("\nGenres Encoded Successfully!")
 print("Total Genres:", len(encoder.classes_))
-
-
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y_encoded, test_size=0.2, random_state=42
@@ -88,15 +79,11 @@ print("====================================")
 print("Model Accuracy:", accuracy * 100, "%")
 print("====================================\n")
 
-
 print("Classification Report:\n")
 print(classification_report(y_test, y_pred))
 
-
 print("\nConfusion Matrix:\n")
 print(confusion_matrix(y_test, y_pred))
-
-
 
 def predict_genre(sample_data):
     """
@@ -108,13 +95,11 @@ def predict_genre(sample_data):
     return genre_name[0]
 
 
-
 sample_song = X.iloc[0].values
 predicted_genre = predict_genre(sample_song)
 
 print("\nExample Prediction:")
 print("Predicted Genre:", predicted_genre)
-
 
 importances = model.feature_importances_
 feature_names = X.columns
